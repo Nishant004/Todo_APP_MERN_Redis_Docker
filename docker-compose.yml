@@ -1,0 +1,56 @@
+version: "3"
+
+services:
+  backend:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      MONGO_URL: mongodb://mongo-service:27017/my_db
+      REDIS_URL: redis://redis-service:6379
+      CORS_ORIGIN: "*"
+      PORT: "8000"
+      SECRET_KEY: 'Todo_VapourEX'
+    depends_on:
+      - mongo-service
+      - redis-service
+    restart: always
+    networks:
+      - shared-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+    networks:
+      - shared-network
+
+  mongo-service:
+    image: mongo
+    restart: always
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - shared-network
+
+  redis-service:
+    image: redis
+    ports:
+      - "6379:6379"
+    restart: always
+    networks:
+      - shared-network
+
+volumes:
+  mongo-data:
+
+networks:
+  shared-network:

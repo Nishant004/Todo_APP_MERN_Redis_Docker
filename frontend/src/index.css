@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@512&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+*{
+    font-family: "Montserrat", sans-serif;
+}
+
+
+input{
+    height: 40px;
+    border: 1px solid hsla(0, 2%, 47%, 0.26);
+    padding: 10px 15px;
+}
+
+input:focus{
+    outline: none;
+    border: 1px solid rgb(53, 49, 49);
+}
+
+.primary{
+    background-color: rgb(32, 172, 228);
+    color: white;
+    /* border: 2px solid grey; */
+    padding: 7px 0;
+    border:none;
+} 
+@layer base{
+
+    body{
+        background-color: rgb(255, 255, 255);
+        overflow-x: hidden;
+    }
+}
+@layer components{
+    .input-box{
+        @apply w-full text-sm bg-transparent border-[1.5px] px-5 pr-3 rounded mb-4 outline-lime-50
+    }
+     .btn-primary{
+        @apply w-full text-sm bg-primary text-white p-2 rounded my-1 hover:bg-blue-500 
+     }
+
+    .icon-btn{
+        @apply text-xl text-slate-300 cursor-pointer hover:text-primary;
+    }
+
+}
